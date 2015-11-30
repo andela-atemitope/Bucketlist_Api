@@ -10,6 +10,7 @@ gem 'spring', :group => :development
 
 gem 'sqlite3'
 
+gem 'jwt'
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # To use ActiveModel has_secure_password
