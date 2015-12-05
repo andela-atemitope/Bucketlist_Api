@@ -7,29 +7,7 @@ Rails.application.routes.draw do
     end
   end
 
-  # namespace :api do
-  # namespace :v1 do
-  #   get 'bucketlists/index'
-  #   end
-  # end
-
-  # get "/auth/logout" => "auth#destroy"
-  # namespace :api do
-  # namespace :v1 do
-  #   get 'bucketlists/create'
-  #   end
-  # end
-
-  # namespace :api do
-  # namespace :v1 do
-  #   get 'bucketlists/edit'
-  #   end
-  # end
-
-  # namespace :api do
-  # namespace :v1 do
-  #   get 'bucketlists/destroy'
-  #   end
+ 
   # end
 
   # The priority is based upon order of creation: first created -> highest priority.

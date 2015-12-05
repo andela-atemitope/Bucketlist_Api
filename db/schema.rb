@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151130104718) do
+ActiveRecord::Schema.define(version: 20151205144405) do
 
   create_table "bucketlists", force: :cascade do |t|
     t.string   "name"
@@ -32,9 +32,9 @@ ActiveRecord::Schema.define(version: 20151130104718) do
     t.string   "username"
     t.string   "email"
     t.string   "password_digest"
-    t.boolean  "logged_in"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.boolean  "logged_in",       default: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
 end
