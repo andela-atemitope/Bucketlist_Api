@@ -1,12 +1,16 @@
 Rails.application.routes.draw do
+root "users#documentation"
+
+
   namespace :api do
     namespace :v1 do
-      resources :bucketlists
-        post "/auth/login" => "auth#authenticate"
-        get "/auth/logout" => "auth#logout"
+      post "/auth/login" => "auth#authenticate"
+      get "/auth/logout" => "auth#logout"
+      resources :bucketlists do
+        resources :items, only: [:create, :update, :destroy]
     end
   end
-
+end
  
   # end
 
@@ -17,7 +21,7 @@ Rails.application.routes.draw do
   # root 'welcome#index'
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do
-      resources :users
+      resources :users, only: [:create]
     end
   end
 
