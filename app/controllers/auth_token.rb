@@ -8,8 +8,9 @@ class AuthToken
 
   def self.decode(token)
     payload = JWT.decode(token, Rails.application.secrets.secret_key_base)[0]
-      DecodedAuthToken.new(payload)
-    rescue
-      nil # It will raise an error if it is not a token that was generated with our secret key or if the user changes the contents of the payload
+    rescue JWT::ExpiredSignature
+      render json: { error: 'Token expired, Please generate a new one'} ; false 
+    rescue JWT::DecodeError
+      render json: { error: 'Invalid token' } ; false
   end
 end

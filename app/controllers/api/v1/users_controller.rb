@@ -1,6 +1,6 @@
 class Api::V1::UsersController < ApplicationController
   
-  skip_before_action :set_current_user, :authenticate_request, only: [:create]
+  skip_before_action :set_current_user, only: [:create]
   # def show
   #   user = User.find(params[:id])
 
@@ -19,6 +19,6 @@ class Api::V1::UsersController < ApplicationController
 
   private 
   def user_params
-    params.require(:user).permit(:username, :email, :password)
+    params.permit(:username, :email, :password)
   end
 end
