@@ -27,10 +27,10 @@ class User < ActiveRecord::Base
 
 
   def log_in
-    update(logged_in: true)
+    update_attribute(:logged_in, true)
   end
 
   def log_out
-    update(logged_in: false)
+    update_attribute(:logged_in, false)
   end
 end
