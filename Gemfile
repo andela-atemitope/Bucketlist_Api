@@ -22,7 +22,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'bcrypt', '~> 3.1.7'
 
 # To use Jbuilder templates for JSON
-gem 'jbuilder'
+# gem 'jbuilder'
+
+gem "active_model_serializers", github: 'rails-api/active_model_serializers'
 
 group :development, :test do
   gem "rspec-rails"
