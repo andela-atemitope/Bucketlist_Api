@@ -16,6 +16,7 @@ class Api::V1::AuthController < ApplicationController
   def logout 
     if @current_user
       @current_user.log_out
+      render json: {message: 'you are successfully logged out'}
     else
       render json: { error: 'you are not logged in' }, status: :unauthorized
     end

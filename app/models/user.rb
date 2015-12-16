@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
 
 
   validates :password,  presence: true, 
-                        length: {in: 4..20}
+                        length: {in: 4..200}
 
   def generate_auth_token
     payload = { user_id: self.id }

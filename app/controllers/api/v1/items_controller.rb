@@ -1,9 +1,10 @@
 class Api::V1::ItemsController < ApplicationController
-  before_action :set_current_user
- 
+  before_action :set_current_user, :find_bucketlist
+  before_filter :set_item, only: [:show, :update, :destroy]
+
   def index
-    bucketlist = @current_user.bucketlists.find_by_id(params[:bucketlist_id])
-    @items = bucketlist.items if bucketlist
+    @items = @bucketlist.items
+    render json: @items
   end
  
   def new
@@ -11,34 +12,45 @@ class Api::V1::ItemsController < ApplicationController
   end
  
   def create
-    bucketlist = @current_user.bucketlists.find_by(id: params[:bucketlist_id])
-    @item = bucketlist.items.create(items_params) if (bucketlist && items_params)
+    @item = @bucketlist.items.new(items_params) 
+    saved_item
+  end
+ 
+  def show #show 
     render json: @item
   end
  
-  def show
-    @bucketlist = @current_user.bucketlists.find_by(id: params[:bucketlist_id])
-    @item = @bucketlist.items.find_by_id(params[:id])
-    render json: @bucketlist, @item
-  end
- 
-  def update
-    @bucketlist = @current_user.bucketlists.find_by_id(params[:bucketlist_id])
-    @item = @bucketlist.items.find_by_id(params[:id]) if @bucketlist
+  def update #update
     @item.update(items_params) if (@item && items_params)
-    render json: @bucketlist, @item
+    render json: @item
   end
  
-  def destroy
-    bucketlist = @current_user.bucketlists.find_by_id(params[:bucketlist_id])
-    item = bucketlist.items.find_by_id(params[:id]) if bucketlist
-    item.destroy if item
-    redirect_to api_v1_bucketlist_items_path, status: 303
+  def destroy #destroy
+    @item.destroy
+    render json: {message: "Your Item has been successfully deleted"}, status: 303
   end
  
   private
  
   def items_params
-    params.require(:item).permit(:name) if params.has_key? "item"
+    params.permit(:bucketlist_id, :name, :done) 
+  end
+
+  def find_bucketlist
+    @bucketlist = @current_user.bucketlists.find_by_id(params[:bucketlist_id])
+    render json: { error: "bucketlist not found" }, status: :not_found unless !@bucketlist.nil?
+  end
+
+  def set_item
+    @item = @bucketlist.items.find_by_id(params[:id])
+    render json: { error: "item not found" }, status: :not_found unless !@item.nil?
+  end
+
+  def saved_item
+    if @item.save
+      render json: @item, status: :created
+    else
+      render json:  @item.errors.full_messages, status: 400
+    end
   end
 end
