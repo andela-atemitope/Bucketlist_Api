@@ -1,6 +1,6 @@
 class Api::V1::AuthController < ApplicationController
-   skip_before_action :set_current_user, only: [:authenticate] # this will be implemented later
-
+   # skip_before_action :set_current_user, only: [:authenticate] # this will be implemented later
+   before_action :set_current_user, only: [:logout]
 
 
   def authenticate

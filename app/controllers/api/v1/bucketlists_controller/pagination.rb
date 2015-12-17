@@ -1,17 +1,23 @@
 module Api
   module V1
-    class BucketlistsController
-      class Pagination
-        # def initialize(params[:limit], search_result, params[:pages] )
-        #   limit = (params[:limit]).to_i
-        #   pages = (params[:pages]).to_i
-        #   @search_result = search_result
-        # end
-
-
-
-
+    class Bucketlist
+      def self.set_limit(limit)
+        case 
+          when limit.nil? || limit.to_i < 0
+            20
+          when limit.to_i > 100
+            100
+          else
+            limit.to_i
+        end
       end
+
+      def self.paginate(search_result, limit = nil, pages = nil)
+        total_items = limit.to_i * pages.to_i
+        offset = total_items - limit.to_i 
+        display = search_result.limit(limit).offset(offset)
+        result_message(display)
+      end   
     end
   end
 end
