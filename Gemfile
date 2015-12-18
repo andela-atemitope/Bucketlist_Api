@@ -26,11 +26,14 @@ gem "codeclimate-test-reporter", group: :test
 # gem 'jbuilder'
 gem 'simplecov', :require => false, :group => :test
 
+
+
 gem "active_model_serializers", github: 'rails-api/active_model_serializers'
 
 group :development, :test do
   # gem "rspec-rails"
   # gem "rspec_api_helpers"
+  gem "database_cleaner"
   gem "pry"
   gem "pry-rails"
 end
