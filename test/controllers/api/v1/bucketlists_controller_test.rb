@@ -54,7 +54,7 @@ class Api::V1::BucketlistsControllerTest < ActionDispatch::IntegrationTest
 
   test "fetches bucketlist by id" do
     create_bucketlist_for_test
-    get "/api/v1/bucketlists/980190965", {},
+    get "/api/v1/bucketlists/1", {},
         "Accept" => Mime::JSON,
         "Content-Type" => Mime::JSON.to_s, "Authorization" => "Token #{@auth_token}"
         # require 'pry'; binding.pry
@@ -66,7 +66,7 @@ class Api::V1::BucketlistsControllerTest < ActionDispatch::IntegrationTest
 
   test "searching for bucketlist " do
     create_bucketlist_for_test
-    get "/api/v1/bucketlists/980190965", {q: "testlist"},
+    get "/api/v1/bucketlists/1", {q: "testlist"},
         "Accept" => Mime::JSON,
         "Content-Type" => Mime::JSON.to_s, "Authorization" => "Token #{@auth_token}"
     assert_equal 200, response.status
@@ -107,7 +107,7 @@ class Api::V1::BucketlistsControllerTest < ActionDispatch::IntegrationTest
 
  test "updates bucketlist" do
     create_bucketlist_for_test
-    patch "/api/v1/bucketlists/980190965", { name: "editedtestbucketlist" }.to_json,
+    patch "/api/v1/bucketlists/1", { name: "editedtestbucketlist" }.to_json,
           "Accept" => Mime::JSON,
           "Content-Type" => Mime::JSON.to_s, "Authorization" => "Token #{@auth_token}"
     assert_equal 200, response.status
