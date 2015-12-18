@@ -1,0 +1,5 @@
+languages:
+  Ruby: true
+  Javascript: false
+exclude_paths: 
+- public/**/*

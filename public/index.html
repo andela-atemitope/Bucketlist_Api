@@ -1,0 +1,535 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Reference</title>
+
+    <link href="stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script src="javascripts/all.js" type="text/javascript"></script>
+
+      <script>
+        $(function() {
+          setupLanguages(["ruby"]);
+        });
+      </script>
+  </head>
+
+  <body class="index">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <img src="images/logo.png" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="ruby">ruby</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="bucketlist_api-documentation">Bucketlist_API Documentation</h1>
+
+<p>Welcome to Bucketlist_api documentation. This will serve as your guide as to how to consume this API</p>
+
+<p>Examples will be displayed to your right and to your left are navigation helpers to help jump to the several sections  of this documentation. </p>
+
+<h2 id="contributing">Contributing</h2>
+
+<ul>
+<li>Fork the repo. </li>
+<li><p>Run the tests. 
+We only take pull requests with passing  tests, and it&rsquo;s great to know that you have a clean slate: <code class="prettyprint">bundle &amp;&amp;   bundle exec rake</code> </p></li>
+<li><p>Add a test for your change 
+Only refactoring and  documentation changes require no new tests. If you are adding   functionality or fixing a bug, we need a test!. Make the test pass.
+Push to your fork and submit a pull request.</p></li>
+</ul>
+
+<h2 id="syntax">Syntax</h2>
+
+<ul>
+<li>Two spaces, no   tabs. </li>
+<li>No trailing whitespace.</li>
+<li>Blank lines should not have any space.</li>
+<li>Prefer <code class="prettyprint">&amp;&amp;, ||</code> over <code class="prettyprint">and, or</code>. <code class="prettyprint">MyClass.my_method(my_arg)</code> not <code class="prettyprint">my_method( my_arg )</code> or <code class="prettyprint">my_method my_arg</code>. <code class="prettyprint">a = b</code> and not <code class="prettyprint">a=b.</code> </li>
+<li>Follow the   conventions you see used in the source already. </li>
+</ul>
+
+<h1 id="introduction">Introduction</h1>
+
+<p>Bucketlist_API is a Restful helpful APi that helps create a bucketlist which supports the addition of multiple items to the bucketlist and also the ability to tick an item as done(completed or incompleted). This is a detailed documentation on how to consume this API and better interact with its end points</p>
+
+<h1 id="creating-an-account">Creating an Account</h1>
+
+<p>Creating an account requires that you make a post request to the user/new endpoint and passing following parameters as part of the </p>
+
+<blockquote>
+<p>To create an account send a POST request containing the necessary params to</p>
+</blockquote>
+<pre class="highlight ruby"><code><span class="c1"># With shell, you can just pass the correct header with each request</span>
+<span class="n">localhost</span><span class="p">:</span><span class="mi">3000</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="n">users?username</span><span class="o">=</span><span class="s2">"youruserame"</span><span class="o">&amp;</span><span class="n">email</span><span class="o">=</span><span class="n">janedoe</span><span class="vi">@email</span><span class="p">.</span><span class="nf">com</span><span class="o">&amp;</span><span class="n">password</span><span class="o">=</span><span class="n">password</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jermainecole"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jermaine@gmail.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"password_digest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$2a$10$nNqo/1a2mkT99MCxtPmv/eWumAZesJIESVCjmHapL.0oZ/0icbnCC"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-14T02:53:03.829Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-14T02:53:03.829Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"logged_in"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Make sure to replace <code class="prettyprint">meowmeowmeow</code> with your API key.</p>
+</blockquote>
+
+<p><strong>Username</strong>: A preferred username with alphanumeric characters and no spaces in between. <em>Your username should be a minimum of 4 and a maximum of 100 characters</em></p>
+
+<p><strong>Email</strong>: An active email address which would be used for account
+recovery in its next version. It should not exceed <code class="prettyprint">255</code> characters and
+should be in this format <code class="prettyprint">janedoe@email.com</code></p>
+
+<p><strong>Password:</strong> A preferred password that should be a minimum of 4
+characters and should not exceed 200 characters</p>
+
+<aside class="notice">
+Without the necessary parameters you will not be able to successfully create an account.
+</aside>
+
+<h1 id="logging-in">LOGGING IN</h1>
+<pre class="highlight ruby"><code>
+<span class="c1">#HTTP REQUEST</span>
+<span class="n">localhost</span><span class="p">:</span><span class="mi">3000</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="n">auth</span><span class="o">/</span><span class="n">login?username</span><span class="o">=</span><span class="n">jermainecole</span><span class="o">&amp;</span><span class="n">password</span><span class="o">=</span><span class="n">jermaine</span><span class="o">&amp;</span><span class="n">email</span><span class="o">=</span><span class="n">jermaine</span><span class="vi">@gmail</span><span class="p">.</span><span class="nf">com</span>
+
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+ </span><span class="nt">"auth_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.yJ1c2VyX2lkIjo2LCJleHAiOjE0NTAxNDg1NTd9.Tc2bJClnH1iwMMmyAkM0B4AIMSzqXyOB5e0-8X0Vbbk"</span><span class="w">
+
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Notice that the response from the last request shows that the user isnt logged in? 
+You can change that by logging in by making a request to the <code class="prettyprint">/auth/login</code> endpoint and passing the following parameters as part of the request</p>
+
+<p><strong>Username:</strong> The username used to create an account on the api 
+<strong>Password:</strong> The unique secret character set you used to create an account on the api 
+<strong>email_address:</strong> The email address assigned to the two above </p>
+
+<p>When you are successfully logged in, an api token is automatically generated for you. This token is used to authenticate your requests and it has to be passed in the headers along with every request when making other operations with this api. By default, each token has 24 hours of validity. If your token expires you should generate a new one by following the above steps</p>
+
+<p><strong>ERRORS</strong>
+If you try using your token after 24 hours, you would get a JSON response saying <code class="prettyprint">“error: your token has expired”</code>. Once presented with this error, you should follow the above steps to generate another token</p>
+
+<aside class="warning">
+  Ensure you copy your token correctly as you will be presesnted with a JSON response saying ‘error: invalid token’. It is advised that you save your token correctly 
+</aside>
+
+<hr>
+
+<h1 id="logging-out">LOGGING OUT</h1>
+<pre class="highlight ruby"><code><span class="c1"># HTTP </span>
+<span class="sb">`GET https://bucketlist_api/auth/logout`</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this: </p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+ </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"you are successfully logged out"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>You can log out by making a get request to the auth/login endpoint and passing in your authentication token in your authorization header</p>
+
+<hr>
+
+<h1 id="authentication">AUTHENTICATION</h1>
+
+<p>The authentication method used by a bucketlist_api is via the use of tokens and its being used throughout the API’s operations</p>
+<pre class="highlight ruby"><code><span class="c1"># In the header of the requests, the token should be passed as shown below</span>
+
+<span class="no">Authorization</span><span class="p">:</span> <span class="no">Token</span> <span class="n">qij0j0909y89gibnkihojibojniubknjsdnsdoj</span>
+</code></pre>
+
+<p>After an account has been created and the user logs in, a unique token is generated and assigned to the account. This token is passed in the header when performing any of the operations that require authentication.This generated token is valid for 24 hours and expires afterwards. Upon expiry the user should login (See above) to generate a new token</p>
+
+<p>The token should be included in the header in the following format</p>
+
+<p>Authorization: Token qij0j0909y89gibnkihojibojniub</p>
+
+<aside class="notice">
+Your token expires after 24 hours, hence you would be required to generate another
+</aside>
+
+<hr>
+
+<h1 id="the-bucketlist">THE BUCKETLIST</h1>
+
+<h2 id="creating-a-bucketlist">Creating a Bucketlist</h2>
+<pre class="highlight ruby"><code><span class="n">curl</span> <span class="o">-</span><span class="no">X</span> <span class="no">POST</span> <span class="o">-</span><span class="n">d</span> <span class="s2">"http://example.com/api//2"</span>
+  <span class="o">-</span><span class="no">H</span> <span class="s2">"Authorization: Token dfijdiojfdjofjdjodjfoqwnooniomn"</span>
+
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">
+</span><span class="p">{</span><span class="w">  </span><span class="nt">"SUCCESS"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Tutorial Bucketlist created!"</span><span class="w"> </span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+
+<p>You can create a new bucketlist by making a post request to the api/v1/bucketlists endpoint and passing in the neccesary parameters in the request</p>
+
+<p>These parameters include the bucketlist name(the desired name for the bucketlist), passed in the request  and the authentication token passed in the header</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST http://bucketlist_api/api/v1/bucketlists</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>nil</td>
+<td>This is the desired name for the bucketlist</td>
+</tr>
+<tr>
+<td>token</td>
+<td>nil</td>
+<td>This is used to authenticate the user against</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+If any of these parameters are not provided you will be presented with the appropriate error
+</aside>
+
+<h2 id="adding-items-to-a-bucketlist">Adding Items to a Bucketlist</h2>
+
+<p>You can add items to a bucketlist by making a post request to the <code class="prettyprint">/api/v1/bucketlist/&lt;id&gt;/items</code> endpoint and passing in the id and the name in alphanumeric characters with the request and the authentication token in the header </p>
+<pre class="highlight ruby"><code><span class="n">curl</span> <span class="o">-</span><span class="no">X</span> <span class="no">POST</span> <span class="o">-</span><span class="n">d</span>  <span class="s2">"name=Item1"</span>
+             <span class="o">-</span><span class="no">H</span>  <span class="s2">"Authorization: Token token=thisiswhereyouwillputyourtoken"</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>  {
+   "id": 7,
+  "name": "usedtoknow",
+  "created_at": "2015-12-16T04:08:46.383Z",
+  "updated_at": "2015-12-16T04:08:46.383Z"
+}
+</code></pre>
+
+<h2 id="fetching-bucketlists">Fetching Bucketlists</h2>
+<pre class="highlight ruby"><code>  <span class="n">curl</span> <span class="o">-</span><span class="no">X</span> <span class="no">GET</span> <span class="o">-</span><span class="n">d</span> <span class="s2">"name=TestBucketlist"</span><span class="p">\</span>
+              <span class="o">-</span><span class="no">H</span> <span class="s2">"Authorization Token token=thisisourtokenfortest"</span><span class="p">\</span>
+              <span class="s2">"https://bucketlist_api.herokuapp.com/api/v1/bucketlists"</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TestBUcketlist1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-14T09:23:04.508Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-14T09:23:04.508Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TestUser"</span><span class="w">
+  </span><span class="p">}</span><span class="err">,</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TestBucketlist2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-14T09:36:28.460Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-14T09:36:28.460Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TestUser"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Making a GET request to the <code class="prettyprint">/api/v1/bucketlists</code> will fetch you the bucketlists </p>
+
+<aside class="notice">
+  You will be required to pass in the authentication token in the header with this request
+</aside>
+
+<h3 id="fetching-a-single-bucketlist">Fetching a Single Bucketlist</h3>
+
+<p>Fetching a Bucketlist can be achieved by passing in the Id of the bucketlist to this endpoint <code class="prettyprint">/api/v1/bucketlists/&lt;id&gt;</code></p>
+
+<aside class="notice">
+When an the Id for an unavailable bucketlist is passed, an error is presented
+You are required to pass in the Authentication token in the header of this request </aside>
+
+<h2 id="editing-bucketlists">Editing Bucketlists</h2>
+
+<h3 id="edit-a-bucketlist">Edit a Bucketlist</h3>
+<pre class="highlight plaintext"><code>curl-X PUT -d "name=newbucketlistname"
+           -H "Authorization: Token token=entertokenhere"
+           "https://bucketlist_api.herokuapp.com/api/v1/bucketlists/69"
+</code></pre>
+
+<p>You can edit a bucketlist by making a put request to the /api/v1/bucketlists/<id> endpoint and passing in the neccesary parameters with the request</p>
+
+<aside class="notice">  You will be required to pass in the authentication token in the header with this request </aside>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">PUT http://bucketlist_api.herokuapp.com/api/v1/bucketlists/69</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>nil</td>
+<td>This is the new_name you wish to assign to the bucketlist</td>
+</tr>
+<tr>
+<td>id</td>
+<td>nil</td>
+<td>This is the id of the bucketlist you intend to edit</td>
+</tr>
+</tbody></table>
+
+<h3 id="edit-a-bucketlist-item">Edit a Bucketlist Item</h3>
+<pre class="highlight ruby"><code><span class="n">curl</span><span class="o">-</span><span class="no">X</span> <span class="no">PUT</span> <span class="o">-</span><span class="n">d</span> <span class="s2">"name=thebucketlistname done=true"</span>
+           <span class="o">-</span><span class="no">H</span> <span class="s2">"Authorization: Token token=yourtokenisenteredhere"</span>
+         <span class="s2">"https://bucketlist_api.herokuapp.com/api/v1/bucketlists/69/items/24"</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"thebucketlistname"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"done"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-15T23:05:26.365Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-16T11:41:15.650Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>You can edit a bucketlist item by making a put request to the /api/v1/bucketlists/<id>/items/<item_id> endpoint and passing in the neccesary parameters with the request </p>
+
+<aside class="notice">  You will be required to pass in the authentication token in the header with this request </aside>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">PUT http://bucketlist_api.herokuapp.com/api/v1/bucketlists/6/items/69</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>nil</td>
+<td>The new_name you wish to assign to the bucketlist</td>
+</tr>
+<tr>
+<td>done</td>
+<td>false</td>
+<td>status of the bucketlist  (default with a boolean value )</td>
+</tr>
+<tr>
+<td>bucketlist_id</td>
+<td>nil</td>
+<td>The id of the bucketlist containing the item you intend to edit</td>
+</tr>
+<tr>
+<td>item_id</td>
+<td>nil</td>
+<td>The id of the item you intend to edit</td>
+</tr>
+</tbody></table>
+
+deleting-a-bucketlist&quot;>Deleting a Bucketlist</h2>
+
+<h3 id="delete-a-bucketlist">Delete a Bucketlist</h3>
+<pre class="highlight ruby"><code><span class="n">curl</span><span class="o">-</span><span class="no">X</span> <span class="no">DELETE</span> <span class="o">-</span><span class="n">d</span> <span class="s2">"id=69"</span>
+              <span class="o">-</span><span class="no">H</span> <span class="s2">"Authorization: Token token=insertyourtokenhere"</span>
+              <span class="s2">"https://bucketlist_api.herokuapp.com/api/v1/bucketlists/69"</span>
+</code></pre>
+
+<blockquote>
+<p>The above command return JSON structured like this: </p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bucket list and all its associated items deleted"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Deleting a bucketlist can be done by making a <code class="prettyprint">DELETE</code> request to the <code class="prettyprint">/api/v1/bucketlists/&lt;id&gt;</code> endpoint and passing the neccesary parameters </p>
+
+<aside class="notice">You will be required to pass in the authentication token in the header with this request</aside>
+
+<h3 id="http">HTTP</h3>
+
+<p><code class="prettyprint">DELETE https://bucketlist_api.herokuapp.com/api/v1/bucketlists/69</code></p>
+
+<h3 id="delete-a-bucketlist-item">Delete a Bucketlist Item</h3>
+<pre class="highlight ruby"><code><span class="n">curl</span><span class="o">-</span><span class="no">X</span> <span class="no">DELETE</span> <span class="o">-</span><span class="n">d</span> <span class="s2">"bucketlist_id=3 item_id=69"</span>
+              <span class="o">-</span><span class="no">H</span> <span class="s2">"Authorization: Token token=insertyourtokenhere"</span>
+              <span class="s2">"https://bucketlist_api.herokuapp.com/api/v1/bucketlists/3/items/69"</span>
+</code></pre>
+
+<blockquote>
+<p>The above command return JSON structured like this: </p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Item has been successfully deleted"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Deleting a bucketlist can be done by making a <code class="prettyprint">DELETE</code> request to the <code class="prettyprint">/api/v1/bucketlists/&lt;bucketlist_id&gt;/items/&lt;item_id&gt;</code> endpoint and passing the neccesary parameters </p>
+
+<h3 id="http">HTTP</h3>
+
+<p><code class="prettyprint">DELETE https://bucketlist_api.herokuapp.com/api/v1/bucketlists/3/items/69</code></p>
+
+<h1 id="searching">Searching</h1>
+
+<h3 id="http">HTTP</h3>
+
+<p><code class="prettyprint">GET https://bucketlist_api.herokuapp.com/api/v1/bucketlists?q=query</code></p>
+<pre class="highlight ruby"><code><span class="n">curl</span> <span class="o">-</span><span class="no">X</span> <span class="no">GET</span> <span class="o">-</span><span class="n">d</span> <span class="s2">"q=query"</span>
+            <span class="o">-</span><span class="no">H</span> <span class="s2">"Authorization: Token token=insertyourtokenhere"</span>
+</code></pre>
+
+<blockquote>
+<p>The above command return JSON structured like this: </p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"query"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-14T09:23:04.508Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-14T09:23:04.508Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"testuser"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+
+</span></code></pre>
+
+<p>Searching for a bucketlist involves passing the query of your search as the <code class="prettyprint">q</code> parameter to the <code class="prettyprint">api/v1/bucketlists</code> endpoint </p>
+
+<h1 id="pagination">Pagination</h1>
+
+<p>Fetching a paginated response is done by sending a <code class="prettyprint">GET</code> request passing the <code class="prettyprint">limit</code>   and <code class="prettyprint">page</code> parameters to the <code class="prettyprint">/api/v1/bucketlists</code> endpoint. Not more than 100 records are displayed if the value of the limit is greater than 100 and not less than 20 records are displayed unless the amount of responses are less than 20. </p>
+
+http&quot;>HTTP</h3>
+
+<p><code class="prettyprint">GET https://bucketlist_api.herokuapp.com/api/v1/bucketlists</code></p>
+
+          <h1 id="endpoints">ENDPOINTS</h1>
+
+<aside class="notice"> Below is the summary of the api&rsquo;s endpoints, its functionality and its public access .</aside>
+
+<p>TBucket API has the following Endpoints:</p>
+
+<table><thead>
+<tr>
+<th>EndPoint</th>
+<th>Public Access</th>
+<th>Functionality</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>POST</td>
+<td>true</td>
+<td>/auth/login  &ndash; Logs a user in</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>false</td>
+<td>/auth/logout &ndash; Logs a user out</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>false</td>
+<td>/bucketlists/ &ndash; Create a new bucket list</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>false</td>
+<td>/bucketlists/ &ndash; List all the created bucket lists</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>false</td>
+<td>/bucketlists/<id> &ndash; Get single bucket list</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>false</td>
+<td>/bucketlists/<id> &ndash; Update this bucket list</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>false</td>
+<td>/bucketlists/<id> &ndash; Delete this single bucket list</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>false</td>
+<td>/bucketlists/<id>/items/ &ndash; Create a new item in bucket list</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>false</td>
+<td>/bucketlists/<id>/items/<item_id> &ndash; Update a bucket list item</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>false</td>
+<td>/bucketlists/<id>/items/<item_id> &ndash; Delete an item in a bucket list</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="ruby">ruby</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
