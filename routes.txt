@@ -14,4 +14,4 @@ api_v1_bucketlist_items POST   /api/v1/bucketlists/:bucketlist_id/items(.:format
                         PATCH  /api/v1/bucketlists/:id(.:format)                      api/v1/bucketlists#update
                         PUT    /api/v1/bucketlists/:id(.:format)                      api/v1/bucketlists#update
                         DELETE /api/v1/bucketlists/:id(.:format)                      api/v1/bucketlists#destroy
-           api_v1_users POST   /api/v1/users(.:format)                                api/v1/users#create {:format=>"json"}
+           api_v1_users POST   /api/v1/users(.:format)                                api/v1/users#create {:format=>"json"} boobs, boobs, ass, ass, boobs!!!
