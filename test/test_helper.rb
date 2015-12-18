@@ -5,12 +5,12 @@ SimpleCov.start
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
+DatabaseCleaner.strategy = :transaction
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   # fixtures :all CodeClimate::TestReporter.configure do |config|
   config.logger.level = Logger::WARN
-
 
 CodeClimate::TestReporter.configure do |config|
   config.logger.level = Logger::WARN
@@ -37,6 +37,7 @@ CodeClimate::TestReporter.start
 
     def create_bucketlist_for_test
       @auth_token = login_for_test
+      Bucketlist.delete_all
       9.times do
         post "/api/v1/bucketlists/",
              { name: "testlist" }.to_json,
@@ -86,3 +87,5 @@ CodeClimate::TestReporter.start
     end
   end
 end
+
+
