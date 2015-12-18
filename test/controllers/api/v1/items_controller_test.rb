@@ -3,7 +3,7 @@ require 'test_helper'
 class Api::V1::ItemsControllerTest < ActionDispatch::IntegrationTest
   test "creates new item" do
     create_bucketlist_for_test
-    post "/api/v1/bucketlists/980190965/items",
+    post "/api/v1/bucketlists/1/items",
          { name: "testitem" }.to_json,
          "Accept" => Mime::JSON, "Content-Type" => Mime::JSON.to_s,
           "Authorization" => "Token #{@auth_token}"
@@ -14,7 +14,7 @@ class Api::V1::ItemsControllerTest < ActionDispatch::IntegrationTest
 
   test "validates item name presence" do
     token = login_for_test
-    post "/api/v1/bucketlists/980190965/items",
+    post "/api/v1/bucketlists/1/items",
          { name: "" }.to_json,
          "Accept" => Mime::JSON, "Content-Type" => Mime::JSON.to_s,
           "Authorization" => "Token #{token}"
@@ -23,7 +23,7 @@ class Api::V1::ItemsControllerTest < ActionDispatch::IntegrationTest
 
   test "validates token presence for item" do
     token = login_for_test
-    post "/api/v1/bucketlists/980190965/items",
+    post "/api/v1/bucketlists/1/items",
          { name: "" }.to_json,
          "Accept" => Mime::JSON, "Content-Type" => Mime::JSON.to_s,
           "Authorization" => ""
@@ -32,7 +32,7 @@ class Api::V1::ItemsControllerTest < ActionDispatch::IntegrationTest
 
   test "fetches the item with the specific id " do
     create_items_for_test
-    get "/api/v1/bucketlists/980190965", {},
+    get "/api/v1/bucketlists/1", {},
          "Accept" => Mime::JSON, "Content-Type" => Mime::JSON.to_s,
           "Authorization" => "Token #{@auth_token}"
     assert_equal 200, response.status
