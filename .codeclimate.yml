@@ -1,4 +1,5 @@
 languages:
   Ruby: true
   Javascript: false
-  Css: false
+exclude_paths: 
+- public/**/*
