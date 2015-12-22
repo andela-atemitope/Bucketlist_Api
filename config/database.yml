@@ -21,7 +21,5 @@ test:
   database: db/test.sqlite3
 
 production:
-  adapter: pg
-  pool: 5
-  timeout: 5000
-  database: db_production
+  <<: *default
+  database: db/test.sqlite3
