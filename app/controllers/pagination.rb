@@ -1,5 +1,5 @@
-module Api
-  module V1
+# module Api
+#   module V1
     class Pagination
       def self.set_limit(limit)
         case 
@@ -27,5 +27,5 @@ module Api
         end
       end    
     end
-  end
-end
+#   end
+# end
