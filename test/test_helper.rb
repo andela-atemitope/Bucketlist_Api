@@ -5,6 +5,7 @@ SimpleCov.start
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
+DatabaseCleaner.strategy = :transaction
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
@@ -37,6 +38,7 @@ CodeClimate::TestReporter.start
 
     def create_bucketlist_for_test
       @auth_token = login_for_test
+      Bucketlist.delete_all
       9.times do
         post "/api/v1/bucketlists/",
              { name: "testlist" }.to_json,

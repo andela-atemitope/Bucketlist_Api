@@ -66,7 +66,7 @@ class Api::V1::BucketlistsControllerTest < ActionDispatch::IntegrationTest
 
   test "searching for bucketlist " do
     create_bucketlist_for_test
-    get "/api/v1/bucketlists/1", {q: "testlist"},
+    get "/api/v1/bucketlists", {q: "testlist"},
         "Accept" => Mime::JSON,
         "Content-Type" => Mime::JSON.to_s, "Authorization" => "Token #{@auth_token}"
     assert_equal 200, response.status

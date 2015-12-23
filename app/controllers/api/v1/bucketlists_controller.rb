@@ -2,13 +2,13 @@ class Api::V1::BucketlistsController < ApplicationController
   before_action :set_current_user
  
   def index
-    limit_set = Bucketlist.set_limit(params[:limit])
+    limit_set = Pagination.set_limit(params[:limit])
     if params[:q]
       display_result =  Bucketlist.search_result(@current_user.id, params[:q])
-      result = Bucketlist.paginate(display_result, limit_set, params[:page])
+      result = Pagination.paginate(display_result, limit_set, params[:page])
     else
       bucketlist = @current_user.bucketlists
-      result = Bucketlist.paginate(bucketlist, limit_set, params[:page])
+      result = Pagination.paginate(bucketlist, limit_set, params[:page])
     end
      render json: result
   end
@@ -61,4 +61,3 @@ class Api::V1::BucketlistsController < ApplicationController
     end
   end
 end
-

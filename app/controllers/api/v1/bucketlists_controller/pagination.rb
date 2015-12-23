@@ -1,6 +1,6 @@
 module Api
   module V1
-    class Bucketlist
+    class Pagination
       def self.set_limit(limit)
         case 
           when limit.nil? || limit.to_i < 0
@@ -17,7 +17,15 @@ module Api
         offset = total_items - limit.to_i 
         display = search_result.limit(limit).offset(offset)
         result_message(display)
-      end   
+      end
+
+      def self.result_message(result) 
+        if result.empty? || result.blank?
+          return "error: no results found for query" 
+        else      
+          return result
+        end
+      end    
     end
   end
 end
