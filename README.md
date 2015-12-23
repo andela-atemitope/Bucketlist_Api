@@ -1,9 +1,17 @@
 ## Bucketlist_API
 
+
+[![Test Coverage](https://codeclimate.com/repos/5673e866fa66501c2b000c0c/badges/9bec07380d8a95a57416/coverage.svg)](https://codeclimate.com/repos/5673e866fa66501c2b000c0c/coverage)
+
+
+
+[![Code Climate](https://codeclimate.com/repos/5673e866fa66501c2b000c0c/badges/9bec07380d8a95a57416/gpa.svg)](https://codeclimate.com/repos/5673e866fa66501c2b000c0c/feed)
+
 ### Bucketlist
 A list of activities someone wants to do before they die is often called a bucket list, because it is a list of things a person wants to do before they "kick the bucket."
+This API provides the features for a bucketlist via a RESTFUL API which uses JSON Web Tokens(JWT) for its Authenticaton. 
 
-Kindly refer to `bucketlist_api.herokuapp.com` to view the full documentation for this RESTFUL API
+Kindly refer to `http://bucketlist-api.herokuapp.com` to view the full documentation for this RESTFUL API
 
 ## Contributing
 1. Fork the repo.
