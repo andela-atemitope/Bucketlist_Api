@@ -39,9 +39,8 @@ RSpec.configure do |config|
     DatabaseCleaner.clean_with(:truncation)
   end
 
-  config.before(:each) do |example|
-    DatabaseCleaner.strategy = example.metadata[:js] ? :truncation : :transaction
-    DatabaseCleaner.start
+  config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
   end
 
   config.after(:each) do

@@ -26,5 +26,3 @@ class Bucketlist < ActiveRecord::Base
     end
   end
 end
-
-
