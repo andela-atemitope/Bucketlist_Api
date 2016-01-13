@@ -10,7 +10,7 @@ gem 'rails-api'
 
 gem 'spring', :group => :development
 
-
+gem 'rubocop'
 
 gem 'jwt'
 
