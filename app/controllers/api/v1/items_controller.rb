@@ -30,7 +30,7 @@ module Api
       def destroy
         @item.destroy
         render json: { message: "Your Item has been deleted" },
-        status: 303
+               status: 303
       end
 
       private
@@ -40,7 +40,7 @@ module Api
       end
 
       def find_bucketlist
-        @bucketlist = @current_user.bucketlists.find_by_id(params[:bucketlist_id])
+        @bucketlist = @cur_user.bucketlists.find_by_id(params[:bucketlist_id])
         if @bucketlist.nil?
           render json: { error: "bucketlist not found" }, status: :not_found
         end
@@ -49,7 +49,8 @@ module Api
       def set_item
         @item = @bucketlist.items.find_by_id(params[:id])
         if @item.nil?
-          render json: { error: "item not found" }, status: :not_found
+          render json: { error: "item not found" },
+                 status: :not_found
         end
       end
 

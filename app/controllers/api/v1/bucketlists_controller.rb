@@ -6,37 +6,37 @@ module Api
       def index
         limit_set = Pagination.set_limit(params[:limit])
         if params[:q]
-          display_result = Bucketlist.search_result(@current_user.id, params[:q])
+          display_result = Bucketlist.search_result(@cur_user.id, params[:q])
           result = Pagination.paginate(display_result, limit_set, params[:page])
         else
-          bucketlist = @current_user.bucketlists
+          bucketlist = @cur_user.bucketlists
           result = Pagination.paginate(bucketlist, limit_set, params[:page])
         end
         render json: result
       end
 
       def create
-        @bucketlist = @current_user.bucketlists.create(name: params[:name])
+        @bucketlist = @cur_user.bucketlists.create(name: params[:name])
         render json: { success: "#{params[:name]} Bucketlist created!" },
-        status: :created if error_message
+               status: :created if error_message
       end
 
       def show
-        @bucketlist = Bucketlist.check_user_list(@current_user.id, params[:id])
+        @bucketlist = Bucketlist.check_user_list(@cur_user.id, params[:id])
         default_message
       end
 
       def update
-        @bucketlist = @current_user.bucketlists.find_by_id(params[:id])
+        @bucketlist = @cur_user.bucketlists.find_by_id(params[:id])
         @bucketlist.update(name: params[:name]) if @bucketlist
         default_message if error_message
       end
 
       def destroy
-        @bucketlist = @current_user.bucketlists.find_by_id(params[:id])
+        @bucketlist = @cur_user.bucketlists.find_by_id(params[:id])
         @bucketlist.destroy if @bucketlist
         render json: { message: "your bucketlist has been deleted" },
-        status: 303
+               status: 303
       end
 
       private

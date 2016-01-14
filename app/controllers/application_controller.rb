@@ -4,10 +4,10 @@ class ApplicationController < ActionController::API
   private
 
   def set_current_user
-    authenticate_or_request_with_http_token do |token, option|
+    authenticate_or_request_with_http_token do |token|
       begin
         payload = AuthToken.decode(token)
-        @current_user = User.find_by(id: payload["user_id"])
+        @cur_user = User.find_by(id: payload["user_id"])
         check_current_user_is_logged_in
       rescue JWT::ExpiredSignature
         render json: { error: "Your token has expired" }
@@ -18,6 +18,6 @@ class ApplicationController < ActionController::API
   end
 
   def check_current_user_is_logged_in
-    @current_user && @current_user.logged_in?
+    @cur_user && @cur_user.logged_in?
   end
 end
