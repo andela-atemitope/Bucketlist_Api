@@ -63,7 +63,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_equal 401, response.status
     assert_equal Mime::JSON, response.content_type
     error = JSON.parse(response.body)
-    # require 'pry'; binding.pry
     assert_equal error['error'], 'Invalid username or password'
   end
 
@@ -75,8 +74,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_equal 200, response.status
     assert_equal Mime::JSON, response.content_type
     error = JSON.parse(response.body)
-    # require 'pry'; binding.pry
-    # assert_equal status[0],  'Name can't be blank'
   end
 
   test 'user login fail for incorrect email' do 
@@ -93,11 +90,9 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test 'user logout' do 
     token = login_for_test
-    # require 'pry'; binding.pry
     get '/api/v1/auth/logout', {},
          'Accept' => Mime::JSON, 'Content-Type' => Mime::JSON.to_s,
          'Authorization' => 'Token #{token}'
-         # require 'pry'; binding.pry
     assert_equal 200, response.status
     assert_equal Mime::JSON, response.content_type
   end
@@ -107,10 +102,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     get '/api/v1/auth/logout', {},
          'Accept' => Mime::JSON, 'Content-Type' => Mime::JSON.to_s,
          'Authorization' => ''
-         # require 'pry'; binding.pry
     assert_equal 401, response.status
-    # assert_equal Mime::JSON, response.content_type
     error = response.body
     assert_equal error, "HTTP Token: Access denied.\n" 
-     end
+  end
 end
