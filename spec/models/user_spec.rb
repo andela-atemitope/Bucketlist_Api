@@ -2,9 +2,11 @@ require "rails_helper"
 
 
 RSpec.describe User, type: :model do
-  subject(:user) { User.new(username: username,
+  subject(:user) { User.new
+                          ( username: username,
                             email: email,
-                            password: password) }
+                            password: password
+                          )}
   let(:username) { "osmondoscar" }
   let(:email) { "osmond@gmail.com" }
   let(:password) { "osmondoranagwa" }
@@ -23,7 +25,7 @@ RSpec.describe User, type: :model do
     end
 
     context "When the length of the username is greater than 100" do
-      let(:username) { "oscar"*60 }
+      let(:username) { "oscar" * 60 }
       it { expect(user).to be_invalid }
     end
 
@@ -54,7 +56,7 @@ RSpec.describe User, type: :model do
     end
 
     context "When the length of the password is less than 8 characters" do
-      let(:password) { "s"*3 }
+      let(:password) { "s" * 3 }
       it { expect(user).to be_invalid }
     end
 
@@ -72,7 +74,7 @@ RSpec.describe User, type: :model do
     end
 
     context "When the length of the email is greater than 255 characters" do
-      let(:email) { "ss@gmail"*553 }
+      let(:email) { "ss@gmail" * 553 }
       it { expect(user).to be_invalid }
     end
 
@@ -81,7 +83,6 @@ RSpec.describe User, type: :model do
       it { expect(user).to be_invalid }
     end
   end
-
 
   describe "#log_in" do
     it "Updates the user's logged in attribute as true" do

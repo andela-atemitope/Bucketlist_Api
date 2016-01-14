@@ -5,13 +5,11 @@ class Bucketlist < ActiveRecord::Base
   before_save { self.name = name.strip.capitalize }
 
   VALID_BUCKETLIST_NAME_REGEX = /\A[a-z0-9\-_]+\z/i
-  validates :name,  presence: true, 
+  validates :name,  presence: true,
                     length: { in: 4..140 },
                     format: { with: VALID_BUCKETLIST_NAME_REGEX }
 
-  # VALID_ID_REGEX = /^[0-9]+$/i
   validates :user_id, presence: true
-                      # format: {with: VALID_ID_REGEX}
 
   def self.search_result(current_user, query)
     Bucketlist.where("name LIKE '#{query}' AND user_id = '#{current_user}'")
@@ -22,7 +20,7 @@ class Bucketlist < ActiveRecord::Base
     if bucket_list.nil? || bucket_list.user_id == user_id
       bucket_list
     else
-      { unauthorized: "You do not have permission to view this list"}
+      { unauthorized: "You do not have permission to view this list" }
     end
   end
 end

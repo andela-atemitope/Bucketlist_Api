@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class Api::V1::BucketlistsControllerTest < ActionDispatch::IntegrationTest
 
@@ -59,7 +59,7 @@ class Api::V1::BucketlistsControllerTest < ActionDispatch::IntegrationTest
     get "/api/v1/bucketlists/1", {},
         "Accept" => Mime::JSON,
         "Content-Type" => Mime::JSON.to_s, "Authorization" => "Token #{@auth_token}"
-        # require 'pry'; binding.pry
+        # require "pry"; binding.pry
     assert_equal 200, response.status
     assert_equal Mime::JSON, response.content_type
     bucketlist = JSON.parse(response.body)

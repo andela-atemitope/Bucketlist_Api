@@ -2,8 +2,10 @@ require "rails_helper"
 
 
 RSpec.describe Bucketlist, type: :model do
-  subject(:bucketlist) { Bucketlist.new(name: name,
-                            user_id: user_id) }
+  subject(:bucketlist) { Bucketlist.new
+                          ( name: name,
+                            user_id: user_id
+                            ) }
   let(:name) { "specialbucketlist" }
   let(:user_id) { 1 }
 
@@ -21,7 +23,7 @@ RSpec.describe Bucketlist, type: :model do
     end
 
     context "When the length of the name is greater than 140" do
-      let(:name) { "oscar"*60 }
+      let(:name) { "oscar" * 60 }
       it { expect(bucketlist).to be_invalid }
     end
 
@@ -30,8 +32,6 @@ RSpec.describe Bucketlist, type: :model do
       it { expect(bucketlist).to be_invalid }
     end
   end
-  
-
 
   describe "#user_id" do
     context "When the user_id is not present" do
@@ -39,6 +39,4 @@ RSpec.describe Bucketlist, type: :model do
       it { expect(bucketlist).to be_invalid }
     end
   end
-
-
 end

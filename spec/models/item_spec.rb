@@ -20,7 +20,7 @@ RSpec.describe Item, type: :model do
     end
 
     context "When the length of the name is greater than 140" do
-      let(:name) { "test"*200 }
+      let(:name) { "test" * 200 }
       it { expect(item).to be_invalid }
     end
 
@@ -55,5 +55,5 @@ RSpec.describe Item, type: :model do
       item = Item.find(1).bucketlist_id
       expect(item).to eql(1)
     end
-  end 
+  end
 end
